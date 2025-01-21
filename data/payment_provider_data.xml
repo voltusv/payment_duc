@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    This XML file defines a payment provider configuration for the Odoo platform.
+    The provider, named "DUC Payment Link," is integrated with specific fields
+    such as code, redirect form view, mode, payment methods, and an associated image.
+-->
+<odoo noupdate="0">
+
+    <record id="payment_provider_ducapi3" model="payment.provider">
+        <field name="name">DUC Payment Link</field>
+        <field name="code">ducapi3</field>
+        <field name="redirect_form_view_id" ref="redirect_form"/>
+        <field name="duc_mode">duc_payment_link</field>
+        <field name="payment_method_ids"
+               eval="[Command.set([
+                         ref('payment_duc.payment_method_duc'),
+                     ])]"
+        />
+        <field name="image_128" type="base64" file="payment_duc/static/description/icon.png"/>
+    </record>
+
+</odoo>
