@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    File Purpose:
+    This XML file is an Odoo data file used to define a new payment method in the Odoo system.
+    It initializes the 'DUC Payment Link' method under the 'payment.method' model.
+-->
+<odoo noupdate="1">
+
+    <record id="payment_method_duc" model="payment.method">
+        <field name="name">DUC Payment Link</field>
+        <field name="code">ducapi3</field>
+        <field name="sequence">1</field>
+        <field name="active">True</field>
+        <field name="image" type="base64" file="payment_duc/static/description/icon.png"/>
+        <field name="support_tokenization">False</field>
+        <field name="support_express_checkout">False</field>
+        <field name="support_refund">none</field>
+    </record>
+
+</odoo>

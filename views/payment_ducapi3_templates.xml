@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="0">
+    <!-- Template for redirecting to payment provider -->
+    <template id="redirect_form">
+        <form t-att-action="api_url" method="post">
+            <input type="hidden" name='reference' t-att-value='reference'/>
+            <input type="hidden" name='amount' t-att-value='amount'/>
+            <input type="hidden" name='currency' t-att-value='currency'/>
+            <input type="hidden" name='payment_provider_id' t-att-value='payment_provider_id'/>
+        </form>
+    </template>
+
+    <!-- Template for displaying payment return information -->
+    <template id="duc_pay_return_info" name="Pay Return Info">
+        <t t-call="website.layout">
+            <div id="wrap">
+                <div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+                    <div class="text-center">
+                        <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <h5 class="mt-4 text-secondary">Processing your payment...</h5>
+                        <p class="text-muted">Please wait a moment while we complete the transaction.</p>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!-- Template for displaying payment link information or errors -->
+    <template id="payment_link_info" name="Pay Link">
+        <t t-call="website.layout">
+            <div id="wrap">
+                <div class="container oe_website_sale py-2">
+                    <div class="row">
+                         <div class="col-12 col-xl order-xl-1 oe_cart">
+                            <div class="row">
+                                <div class="col">
+                                    <span t-if="message" name="error_message" style="color:red"><t t-esc="message"/></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

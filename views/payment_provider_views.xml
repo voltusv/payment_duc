@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--
+        This XML file customizes the payment provider form in Odoo.
+        It extends the `payment.payment_provider_form` view to add additional fields
+        and functionality specific to the "DUC Payment Link" provider.
+
+        The additional fields are displayed only when the provider's code is set to 'ducapi3'.
+        This dynamic behavior ensures that irrelevant fields are hidden for other providers.
+
+        Key Features:
+        1. Modular Structure: Uses `inherit_id` to inherit an existing view.
+        2. Dynamic Visibility: Uses the `invisible` attribute to show fields conditionally.
+        3. Validation: Required fields depend on specific conditions (e.g., the state of the provider).
+        4. Sensitive Information: Fields like passwords are flagged as secure using `password="True"`.
+
+        This customization is crafted to support the specific configuration needs of the "DUCAPI3" payment provider.
+        Ensure thorough testing for different scenarios, particularly when switching providers or states.
+    -->
+
+    <record id="payment_provider_form" model="ir.ui.view">
+        <field name="name">DUC Payment Link</field>
+        <field name="model">payment.provider</field>
+        <field name="inherit_id" ref="payment.payment_provider_form"/>
+        <field name="arch" type="xml">
+            <group name="provider_credentials" position='inside'>
+                <group invisible="code != 'ducapi3'">
+                    <field name="ducapi3_api_url" required="[('code', '=', 'ducapi3'), ('state', '!=', 'disabled')]"/>
+                    <field name="ducapi3_ngrok_link" required="[('code', '=', 'ducapi3'), ('state', '!=', 'disabled')]" />
+                    <field name="ducapi3_api_key" required="[('code', '=', 'ducapi3'), ('state', '!=', 'disabled')]" />
+                    <field name="ducapi3_mercant_name" required="[('code', '=', 'ducapi3'), ('state', '!=', 'disabled')]"/>
+                    <field name="ducapi3_merchant_password" required="[('code', '=', 'ducapi3'), ('state', '!=', 'disabled')]" password="True"/>
+                    <field name="ducapi3_merchant_phone" required="[('code', '=', 'ducapi3'), ('state', '!=', 'disabled')]"/>
+                    <field name="ducapi3_payment_page" required="[('code', '=', 'ducapi3'), ('state', '!=', 'disabled')]"/>
+                    <field name="payment_method_ids" required="[('code', '=', 'ducapi3'), ('state', '!=', 'disabled')]"/>
+                </group>
+            </group>
+        </field>
+    </record>
+
+</odoo>
